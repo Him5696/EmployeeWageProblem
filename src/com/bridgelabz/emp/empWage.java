@@ -8,17 +8,22 @@ public class empWage {
         int EMP_WAGE_PER_HOUR = 20;
         int employeeCheck =(int)(Math.random() * 10) % 3;
 
-        if (employeeCheck == IS_FULL_TIME) {
-            System.out.println("Employee is present full Day");
-            EMP_PER_HOUR = 8;
-        }else if(employeeCheck == IS_PART_TIME){
-            System.out.println("Part time Employee");
-            EMP_PER_HOUR = 4;
-        }else{
-            System.out.println("Employee is Absent");
-            EMP_PER_HOUR = 0;
+        switch (employeeCheck){
+            case 1:
+                System.out.println("Employee is full time");
+                EMP_PER_HOUR=8;
+                break;
+            case 2:
+                System.out.println("Employee is part time");
+                EMP_PER_HOUR = 4;
+                break;
+            default:
+                System.out.println("Employee is absent");
+                EMP_PER_HOUR=0;
+                break;
         }
         int empWage = EMP_PER_HOUR  * EMP_WAGE_PER_HOUR;
         System.out.println("Employee Wages is: " + empWage);
+
     }
 }
