@@ -5,40 +5,40 @@ public class empWage {
     public static final int IS_PART_TIME = 2;
     public static int EMP_WAGE_PER_HOUR = 20;
     public static final int MAX_WORKING_DAYS = 20;
+    public static final int FULL_DAY_HR = 8;
+    public static final int PART_DAY_HR = 4;
     public static final int MAX_HRS_IN_MONTH = 100;
-    public static void main(String[] args) {
+    static int totalWorkingDays = 0;
+    static int workingHours = 0;
+    static int totalEmpHours = 0;
 
-        int EMP_PER_HOUR  = 0;
-        int totalEmpWage = 0;
-        int totalEmpWorkingHours = 0;
-        int totalWorkingDay = 0;
-        for (int day = 0; day < MAX_WORKING_DAYS ; day++) {
-            while (totalEmpWorkingHours <= MAX_HRS_IN_MONTH && totalWorkingDay < MAX_WORKING_DAYS) {
-                totalWorkingDay++;
-                int randomNum = (int) (Math.random() * 10 % 3);
-
-                switch (randomNum) {
-                    case 1:
-                        System.out.println("Employee is full time");
-                        EMP_PER_HOUR = 8;
-                        break;
-                    case 2:
-                        System.out.println("Employee is part time");
-                        EMP_PER_HOUR = 4;
-                        break;
-                    default:
-                        System.out.println("Employee is absent");
-                        EMP_PER_HOUR = 0;
-                        break;
-                }
-                totalEmpWorkingHours += EMP_PER_HOUR;
-                int empWage = (EMP_PER_HOUR * EMP_WAGE_PER_HOUR);
-                totalEmpWage += empWage;
-                System.out.println("Emp Wage: " + empWage);
+    public static int getWorkingHours() {
+        while (totalEmpHours < MAX_HRS_IN_MONTH && totalWorkingDays < MAX_WORKING_DAYS) {
+            totalWorkingDays++;
+            int empCheck = (int)(Math.random() * 10) % 3;
+            // Calculating Wage On Employee Type
+            switch (empCheck) {
+                case 0:
+                    workingHours = FULL_DAY_HR;
+                    System.out.println("Full Day Hr " + workingHours);
+                    break;
+                case 1:
+                    workingHours = PART_DAY_HR;
+                    System.out.println("Part Day Hr" + workingHours);
+                    break;
+                default:
+                    workingHours = 0;
             }
-            System.out.println("total days: " + totalWorkingDay);
-            System.out.println("Total Employee Working Hrs: " + totalEmpWorkingHours);
-            System.out.println("Total Employee Wage: " + totalEmpWage);
+            totalEmpHours += workingHours;
+            System.out.println("Day: " + totalWorkingDays + " workingHours: " + workingHours);
         }
+        //Calculated Employ wage
+        int totalEmpWage = totalEmpHours * EMP_WAGE_PER_HOUR;
+        System.out.println("Total Emp Wage: " + totalEmpWage);
+        return totalEmpWage;
+    }
+
+    public static void main(String[] args) {
+        getWorkingHours();
     }
 }
